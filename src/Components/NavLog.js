@@ -81,7 +81,7 @@ export default function NavLog ()  {
                         <Footer />
                     </nav></div>
                 <Switch>
-                    <Route path="/" exact component={Home}></Route>
+                    <Route path="/extractData" exact component={Home}></Route>
                     <Route path="/contact" exact component={Contact}></Route>
                     <Route path="/extract" exact component={Extract}></Route>
                     <Route path="/login" exact component={Login}></Route>

@@ -72,7 +72,7 @@ export default function NaV()  {
                         <Footer />
                     </nav></div>
                 <Switch>
-                    <Route path="/" exact component={Home}></Route>
+                    <Route path="/extractData" exact component={Home}></Route>
                     <Route path="/contact" exact component={Contact }></Route>
                     <Route path="/extract" exact component={Login}></Route>
                     <Route path="/login" exact component={Login}></Route>
