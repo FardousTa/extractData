@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import './Css/App.css';
+import './Css/bootstrap.min.css';
+import './Css/magnific-popup.css';
+import NaV from './Components/NaV.js';
+import {Provider} from 'react-redux';
+import NavLog from './Components/NavLog';
+import {AuthProvider, AuthContext} from "./store/AuthContext";
+import React, {useContext} from 'react';
 function App() {
+  const authContext = useContext(AuthContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <div >
+      <main className="container-fluid">
+       { authContext.auth.email ? <NavLog/>: <NaV /> }
+      </main>
+    </div> 
+   
   );
 }
 
-export default App;
+function AppWithStore(){
+  return (<AuthProvider>
+    <App />
+  </AuthProvider>);
+}
+
+export default AppWithStore;
+
