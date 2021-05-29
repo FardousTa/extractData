@@ -43,7 +43,7 @@ export default function NaV()  {
                         <ul id="tmMainNav" className="nav flex-column text-uppercase text-right tm-main-nav"
                          onClick={() => setopen(!open)}>
                             <li className="nav-item" >
-                                <Link to="/" className='nav-link active' href="#intro">
+                                <Link to="/extractData" className='nav-link active' href="#intro">
                                     <span className="d-inline-block mr-3">Home</span>
                                     <span className="d-inline-block tm-white-rect"></span></Link>
                             </li>

@@ -11,7 +11,7 @@ class Home extends Component {
                                     Extract Data From Files
                                     </h2>
                                 <p className="tm-color-gray">
-                                     system is able to receive files/documents ,
+                                    The system is able to receive files/documents ,
                                     and it extracts data from them by linking the content with the data of the owner of the document,
                                     and the required data is output according to the user's request.
                         </p>
