@@ -42,7 +42,7 @@ Link {
 }
 
 .tm-color-primary {
-  color: #069;
+  color: rgba(107, 27, 90, 0.945);
 }
 
 .tm-color-gray {
@@ -111,6 +111,15 @@ background-size: cover;
   text-align: center;
   margin: 70px auto 90px;
  
+}
+.logo{
+  margin-top: -20px;
+  box-sizing: content-box;
+  width: 410px;
+ height: 380px;
+  min-height: 200px;
+ margin-bottom: -82px;
+
 }
 /* double inner & outer logo box*/
 .tm-double-border-1,
@@ -256,8 +265,8 @@ background-size: cover;
 
 .tm-social-link:hover,
 .tm-social-link:focus {
- 
-  color: #F93;;
+  color: rgba(107, 27, 90, 0.945);
+
 }
 
 .tm-footer-link {
@@ -265,7 +274,8 @@ background-size: cover;
 }
 
 .tm-footer-link:hover {
-  color: #F93;
+  color:  rgba(107, 27, 90, 0.945);
+
   text-decoration: none;
 }
 

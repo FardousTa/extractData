@@ -12,6 +12,7 @@ import Footer from "./Footer.js";
 import Login from "../Pages/Login.js";
 import Show from "../Pages/Show.js";
 import SignUp from "../Pages/SignUp.js";
+import logo from "../img/logo/logo.png";
 
 export default function NavLog() {
   let c = "tm-bg-black-transparent tm-sidebar ";
@@ -48,13 +49,7 @@ export default function NavLog() {
             />
           </button>
           <div className="tm-sidebar-sticky" onClick={() => setopen(!open)}>
-            <div className="tm-brand-box">
-              <div className="tm-double-border-1">
-                <div className="tm-double-border-2">
-                  <h1 className="tm-brand text-uppercase">Extract Data</h1>
-                </div>
-              </div>
-            </div>
+            <img src={logo} className="logo" />
           </div>
           <ul
             id="tmMainNav"
