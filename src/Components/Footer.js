@@ -13,23 +13,23 @@ class Footer extends Component {
         return ( <div>
 <ul   className="nav flex-row tm-social-links">
 <li className="nav-item">
-                  <a href="https://dribbble.com" className="nav-link tm-social-link">
+                  <a href="https://www.linkedin.com/in/fardous-tarsha-72bb09207/" className="nav-link tm-social-link">
                     <FontAwesomeIcon  icon={faLinkedin }   />
                   </a>
             
                 </li>
                 <li className="nav-item">
-                <a href="https://dribbble.com" className="nav-link tm-social-link">
+                <a href="https://fardoos.tar@gmail.com" className="nav-link tm-social-link">
                     <FontAwesomeIcon  icon={faGoogle }   />
                   </a>
                 </li>
                 <li className="nav-item">
-                <a href="https://dribbble.com" className="nav-link tm-social-link">
+                <a href="https://www.facebook.com/fardos.tarsha.7" className="nav-link tm-social-link">
                     <FontAwesomeIcon  icon={faFacebook }   />
                   </a>
                 </li>
                 <li className="nav-item">
-                <a href="https://dribbble.com" className="nav-link tm-social-link">
+                <a href="https://twitter.com/fardos_ta" className="nav-link tm-social-link">
                     <FontAwesomeIcon  icon={faTwitter }   />
                   </a>
                 </li>

@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { Field, Formik, ErrorMessage, useFormik } from "formik";
-import * as yup from "yup";
+
 import TextBorder from "../Components/TextBorder.js";
 import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
 import ProfileMode from "../Components/ProfileMode.js";
