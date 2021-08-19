@@ -79,7 +79,7 @@ background-color: rgba(6, 9, 34, 0.815);
   margin-right: -30px;
   min-height: 662px;
   background-image: url('../img/back-ground766.png');
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 
 
