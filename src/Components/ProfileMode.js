@@ -1,9 +1,7 @@
 import React, { Component, useContext, useState } from "react";
 import { Link, Route } from "react-router-dom";
 
-import { AuthContext } from "../store/AuthContext.js";
 export default function ProfileMode() {
-  const authContext = useContext(AuthContext);
   let tab = "tab-pane fade ";
   let tabActive = "tab-pane fade show active";
   const [tabClicked, settabClicked] = useState({
@@ -15,9 +13,7 @@ export default function ProfileMode() {
 const [tabClicked3,settabClicked3]= useState(true);
 */
   function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    authContext.setAuth({});
+
   }
 
   // to access to the email    {authContext.auth.email }
@@ -63,7 +59,7 @@ const [tabClicked3,settabClicked3]= useState(true);
                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
                               John Smith
                             </h4>
-                            <p class="mb-0"> {authContext.auth.email}</p>
+                            <p class="mb-0"> </p>
 
                             <div class="mt-2">
                               <button
@@ -82,11 +78,11 @@ const [tabClicked3,settabClicked3]= useState(true);
                           <div class="text-center text-sm-right">
                             <div class="text-muted">
                               <small>
-                                You logged in: {authContext.auth.date2}
+                                You logged in: 
                               </small>
                             </div>
                             <div class="text-muted">
-                              <small>at : {authContext.auth.date1}</small>
+                              <small>at :</small>
                             </div>
                           </div>
                         </div>
@@ -189,7 +185,6 @@ const [tabClicked3,settabClicked3]= useState(true);
                                     <input
                                       class="form-control rounded-0 border-top-0 border-right-0 border-left-0"
                                       type="text"
-                                      placeholder={authContext.auth.name}
                                     />
                                   </div>
                                 </div>
@@ -204,7 +199,6 @@ const [tabClicked3,settabClicked3]= useState(true);
                                     <input
                                       class="form-control rounded-0 border-top-0 border-right-0 border-left-0"
                                       type="email"
-                                      placeholder={authContext.auth.email}
                                     />
                                   </div>
                                 </div>

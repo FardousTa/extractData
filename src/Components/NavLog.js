@@ -6,7 +6,6 @@ import NotFound from "../Pages/NotFound.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Contact from "../Pages/Contact.js";
-import { AuthContext } from "../store/AuthContext.js";
 import Extract from "../Pages/Extract.js";
 import Footer from "./Footer.js";
 import Login from "../Pages/Login.js";
@@ -20,11 +19,9 @@ export default function NavLog() {
   let showIcon = "showIcon styleIcon ";
   let hideIcon = "hideIcon styleIcon";
   const [open, setopen] = useState(true); // for responsive navbar
-  const authContext = useContext(AuthContext);
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    authContext.setAuth({});
   }
 
   return (
@@ -93,6 +90,8 @@ export default function NavLog() {
         <Route path="/contact" exact component={Contact}></Route>
         <Route path="/extract" exact component={Extract}></Route>
         <Route path="/login" exact component={Login}></Route>
+        <Route path="/login" exact component={Login}></Route>
+
         <Route path="/show" exact component={Show}></Route>
         <Route path="/SignUp" exact component={SignUp}></Route>
         <Route component={NotFound}></Route>

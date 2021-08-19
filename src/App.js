@@ -1,29 +1,21 @@
-import './Css/App.css';
-import './Css/bootstrap.min.css';
-import './Css/magnific-popup.css';
-import NaV from './Components/NaV.js';
-import {Provider} from 'react-redux';
-import NavLog from './Components/NavLog';
-import {AuthProvider, AuthContext} from "./store/AuthContext";
-import React, {useContext} from 'react';
-function App() {
-  const authContext = useContext(AuthContext);
-  return (
-
-    <div >
+import "./Css/App.css";
+import "./Css/bootstrap.min.css";
+import "./Css/magnific-popup.css";
+import NaV from "./Components/NaV.js";
+import { Provider } from "react-redux";
+import NavLog from "./Components/NavLog";
+import React, { Component } from "react";
+function App() {  return (
+    <div>
       <main className="container-fluid">
-       { authContext.auth.email ? <NavLog/>: <NaV /> }
+          <NaV />
       </main>
-    </div> 
-   
+    </div>
   );
 }
 
-function AppWithStore(){
-  return (<AuthProvider>
-    <App />
-  </AuthProvider>);
+function AppWithStore() {
+  return <App />;
 }
 
 export default AppWithStore;
-

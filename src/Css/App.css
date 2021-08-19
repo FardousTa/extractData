@@ -42,20 +42,23 @@ Link {
 }
 
 .tm-color-primary {
-  color: rgba(107, 27, 90, 0.945);
+  color: rgba(1, 7, 56, 0.815);
 }
 
 .tm-color-gray {
-  color: #333;
+  color: rgb(51, 51, 51);
+  font-weight: bolder;
 }
 /* لون navbar*/
 .tm-bg-black-transparent {
-  background-color: rgba(0, 0, 0, 0.815);
+background-color: rgba(6, 9, 34, 0.815);
+
 }
 /* مربع الصفحة الرئيسية */
 .tm-bg-white-transparent {
-  background-color: rgba(255, 255, 255, 0.302);
-  border: 1px solid white;
+ 
+  background-color: rgba(255, 255, 255, 0.377);
+  border: 1px solid #ffb266;
 }
 
 .tm-intro {
@@ -75,10 +78,10 @@ Link {
   margin-left: -30px;
   margin-right: -30px;
   min-height: 662px;
-  background-image: url('../img/back-ground.png');
-  background-position: center center;
- background-repeat: no-repeat;
-background-size: cover;
+  background-image: url('../img/back-ground766.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+
 
 }
 /* القسم التاني الابيض الخاص بكل الصفحات حتى الرئيسية*/
@@ -265,7 +268,7 @@ background-size: cover;
 
 .tm-social-link:hover,
 .tm-social-link:focus {
-  color: rgba(107, 27, 90, 0.945);
+  color: #d9a967;
 
 }
 
@@ -274,7 +277,7 @@ background-size: cover;
 }
 
 .tm-footer-link:hover {
-  color:  rgba(107, 27, 90, 0.945);
+  color:  #d9a967;
 
   text-decoration: none;
 }

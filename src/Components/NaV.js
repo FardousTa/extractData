@@ -6,21 +6,23 @@ import NotFound from "../Pages/NotFound.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Contact from "../Pages/Contact.js";
-import { AuthContext } from "../store/AuthContext.js";
 import Footer from "./Footer.js";
 import Login from "../Pages/Login.js";
 import Show from "../Pages/Show.js";
 import Extract from "../Pages/Extract.js";
 import SignUp from "../Pages/SignUp.js";
 import logo from "../img/logo/logo.png";
+import ProfileMode from './ProfileMode.js';
+import Logged from "../store/contextLog.js";
+
 export default function NaV() {
   let c = "tm-bg-black-transparent tm-sidebar ";
   let cc = "tm-bg-black-transparent tm-sidebar show";
   let showIcon = "showIcon styleIcon ";
   let hideIcon = "hideIcon styleIcon";
-  const [open, setopen] = useState(true); // for responsive navbar
-  const authContext = useContext(AuthContext);
+  const logg= useContext(Logged);
 
+  const [open, setopen] = useState(true); // for responsive navbar
   return (
     <BrowserRouter>
       <div className="row">
@@ -64,7 +66,10 @@ export default function NaV() {
 
             <li className="nav-item">
               <Link to="/login" className="nav-link active" href="#intro">
+              
                 <span className="d-inline-block mr-3">Log In </span>
+                
+                
                 <span className="d-inline-block tm-white-rect"></span>
               </Link>
             </li>
@@ -91,6 +96,9 @@ export default function NaV() {
         <Route path="/contact" exact component={Contact}></Route>
         <Route path="/extract" exact component={Login}></Route>
         <Route path="/login" exact component={Login}></Route>
+        <Route path="/login" exact component={Login}></Route>
+        <Route path="/profile" exact component={ProfileMode}></Route>
+
         <Route path="/show" exact component={Show}></Route>
         <Route path="/SignUp" exact component={SignUp}></Route>
         <Route component={NotFound}></Route>
