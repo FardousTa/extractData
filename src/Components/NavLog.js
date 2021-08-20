@@ -12,6 +12,7 @@ import Login from "../Pages/Login.js";
 import Show from "../Pages/Show.js";
 import SignUp from "../Pages/SignUp.js";
 import logo from "../img/logo/logo.png";
+import ProfileMode from './ProfileMode.js';
 
 export default function NavLog() {
   let c = "tm-bg-black-transparent tm-sidebar ";
@@ -90,8 +91,7 @@ export default function NavLog() {
         <Route path="/contact" exact component={Contact}></Route>
         <Route path="/extract" exact component={Extract}></Route>
         <Route path="/login" exact component={Login}></Route>
-        <Route path="/login" exact component={Login}></Route>
-
+        <Route path="/profile" exact component={ProfileMode}></Route>
         <Route path="/show" exact component={Show}></Route>
         <Route path="/SignUp" exact component={SignUp}></Route>
         <Route component={NotFound}></Route>
