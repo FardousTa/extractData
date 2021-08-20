@@ -8,7 +8,7 @@ import React, { Component } from "react";
 function App() {  return (
     <div>
       <main className="container-fluid">
-          <NaV />
+          <NavLog />
       </main>
     </div>
   );
