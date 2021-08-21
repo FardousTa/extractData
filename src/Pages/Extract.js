@@ -49,18 +49,18 @@ class Extract extends Component {
     values.file = file;
     const data = new FormData();
     for (var x = 0; x < this.state.selectedFile.length; x++) {
-      data.append("file", file[x]);
+      data.append("image", file[x]);
     }
-    data.append("dataType", type); // type is the field in backend
+    data.append("lang", type); // type is the field in backend
     const config = {
       headers: { "content-type": "multipart/form-data" }, //enables web frameworks to automatically parse the data.
     };
     console.log(this.state.selectedFile);
     console.log(data);
     axios
-      .post("https://retoolapi.dev/Kr9mV0/data", data, config)
+      .post("http://127.0.0.1:8000/api/v1/ocr_uploader/", data, config)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
       })
 
       .catch((err) => console.error(err));
@@ -77,9 +77,9 @@ class Extract extends Component {
             className="form-control rounded-0 border-top-0 border-right-0 border-left-0"
           >
             <option defaultValue>Choose File Type </option>
-            <option value="bill">Bill</option>
-            <option value="card">University card</option>
-            <option value="Passport">Passport</option>
+
+            <option value="EN">EN</option>
+            <option value="AR">AR</option>
           </Field>
         </div>
         <div className="error">

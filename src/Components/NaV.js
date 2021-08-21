@@ -10,19 +10,21 @@ import Footer from "./Footer.js";
 import Login from "../Pages/Login.js";
 import Show from "../Pages/Show.js";
 import Extract from "../Pages/Extract.js";
+import ProfileMode from "../Components/ProfileMode.js";
+import { isLogged, loggedout } from "../store/contextLog.js";
+
 import SignUp from "../Pages/SignUp.js";
 import logo from "../img/logo/logo.png";
-import ProfileMode from './ProfileMode.js';
-import Logged from "../store/contextLog.js";
-
 export default function NaV() {
   let c = "tm-bg-black-transparent tm-sidebar ";
   let cc = "tm-bg-black-transparent tm-sidebar show";
   let showIcon = "showIcon styleIcon ";
   let hideIcon = "hideIcon styleIcon";
-  const logg= useContext(Logged);
-
   const [open, setopen] = useState(true); // for responsive navbar
+  function logout() {
+    loggedout();
+  }
+
   return (
     <BrowserRouter>
       <div className="row">
@@ -45,12 +47,7 @@ export default function NaV() {
             />
           </button>
           <div className="tm-sidebar-sticky" onClick={() => setopen(!open)}>
-            
-            <img
-                src={logo}
-                className="logo"
-              />
-           
+            <img src={logo} className="logo" />
           </div>
           <ul
             id="tmMainNav"
@@ -63,28 +60,35 @@ export default function NaV() {
                 <span className="d-inline-block tm-white-rect"></span>
               </Link>
             </li>
-
-            <li className="nav-item">
-              <Link to="/login" className="nav-link active" href="#intro">
-              
-                <span className="d-inline-block mr-3">Log In </span>
-                
-                
-                <span className="d-inline-block tm-white-rect"></span>
-              </Link>
-            </li>
-
             <li className="nav-item">
               <Link to="/extract" className="nav-link active" href="#intro">
                 <span className="d-inline-block mr-3">Extract Data </span>
                 <span className="d-inline-block tm-white-rect"></span>
               </Link>
             </li>
+
             <li className="nav-item">
+              <Link to="/login" className="nav-link active" href="#intro">
+                {isLogged() ? (
+                  <span className="d-inline-block mr-3" onClick={logout}>
+                    LogOut{" "}
+                  </span>
+                ) : (
+                  <span className="d-inline-block mr-3">Log In </span>
+                )}
+                <span className="d-inline-block tm-white-rect"></span>
+              </Link>
+            </li>
+
+            <li className="nav-item"> {isLogged() ?
+            <Link to="/profile" className="nav-link active">
+            <span className="d-inline-block mr-3"> Your Profile</span>
+            <span className="d-inline-block tm-white-rect"></span>
+          </Link>:
               <Link to="/contact" className="nav-link active">
                 <span className="d-inline-block mr-3">LET'S TALK</span>
                 <span className="d-inline-block tm-white-rect"></span>
-              </Link>
+              </Link>}
             </li>
           </ul>
 
@@ -94,13 +98,16 @@ export default function NaV() {
       <Switch>
         <Route path="/extractData" exact component={Home}></Route>
         <Route path="/contact" exact component={Contact}></Route>
-        <Route path="/extract" exact component={Login}></Route>
+        {isLogged() ? (
+          <Route path="/extract" exact component={Extract}></Route>
+        ) : (
+          <Route path="/extract" exact component={Login}></Route>
+        )}
         <Route path="/login" exact component={Login}></Route>
-        <Route path="/login" exact component={Login}></Route>
-        <Route path="/profile" exact component={ProfileMode}></Route>
-
         <Route path="/show" exact component={Show}></Route>
         <Route path="/SignUp" exact component={SignUp}></Route>
+        <Route path="/profile" exact component={ProfileMode}></Route>
+
         <Route component={NotFound}></Route>
       </Switch>
     </BrowserRouter>

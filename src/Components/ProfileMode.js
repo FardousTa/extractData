@@ -57,9 +57,9 @@ const [tabClicked3,settabClicked3]= useState(true);
                         <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                           <div class="text-center text-sm-left mb-2 mb-sm-0">
                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
-                              John Smith
+                             Fardous Ta
                             </h4>
-                            <p class="mb-0"> </p>
+                            <p class="mb-0">fardoos.tar@gmail.com </p>
 
                             <div class="mt-2">
                               <button
@@ -78,11 +78,11 @@ const [tabClicked3,settabClicked3]= useState(true);
                           <div class="text-center text-sm-right">
                             <div class="text-muted">
                               <small>
-                                You logged in: 
+                                You logged in: 1/1/2021
                               </small>
                             </div>
                             <div class="text-muted">
-                              <small>at :</small>
+                              <small>at :1:00 pm</small>
                             </div>
                           </div>
                         </div>
@@ -185,6 +185,7 @@ const [tabClicked3,settabClicked3]= useState(true);
                                     <input
                                       class="form-control rounded-0 border-top-0 border-right-0 border-left-0"
                                       type="text"
+                                      placeholder="Fardous Ta"
                                     />
                                   </div>
                                 </div>
@@ -199,6 +200,7 @@ const [tabClicked3,settabClicked3]= useState(true);
                                     <input
                                       class="form-control rounded-0 border-top-0 border-right-0 border-left-0"
                                       type="email"
+                                      placeholder="fardoos.tar@gmail.com"
                                     />
                                   </div>
                                 </div>
