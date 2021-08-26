@@ -1,22 +1,24 @@
-import "./Css/App.css";
-import "./Css/bootstrap.min.css";
-import "./Css/magnific-popup.css";
-import NaV from "./Components/NaV.js";
+import './Css/App.css';
+import './Css/bootstrap.min.css';
+import './Css/magnific-popup.css';
+import NaV from './Components/NaV.js';
+function App() {
+  return (
 
-import React, { Component } from "react";
-function App() { 
-   return (
-
-    <div>
+    <div >
       <main className="container-fluid">
-    <NaV/>
+       <NaV /> 
       </main>
-    </div>
+    </div> 
+   
   );
 }
 
-function AppWithStore() {
-  return <App />;
+function AppWithStore(){
+  return (
+    <App />
+ );
 }
 
 export default AppWithStore;
+

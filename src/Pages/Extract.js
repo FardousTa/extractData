@@ -10,7 +10,7 @@ import axios from "axios";
 class Extract extends Component {
   state = {
     title: "Upload your files",
-    p1: "Your files and their type must be uploaded to extract data from them ",
+    p1: "Your files and their language must be uploaded to extract data from them ",
     p2: (
       <span>
         {" "}
@@ -21,18 +21,24 @@ class Extract extends Component {
     ),
     filesName: [],
     selectedFile: null,
+    fileType: "",
+
+
   };
 
   handleselectedFile = (event) => {
     const files = event.currentTarget.files;
     const Name = [];
+    const Type = [];
     for (let i = 0; i < files.length; i++) {
       Name[i] = files[i].name;
+      Type[i] = files[i].type;
     }
     this.setState({
       ...this.state,
       selectedFile: files,
       filesName: Name,
+      fileType: Type,
     });
   };
   clearFiles = () => {
@@ -46,26 +52,41 @@ class Extract extends Component {
   OnSubmit = (values) => {
     let type = values.datatype;
     let file = this.state.selectedFile;
+  let  userid=localStorage.getItem('userid');
     values.file = file;
     const data = new FormData();
-    for (var x = 0; x < this.state.selectedFile.length; x++) {
-      data.append("image", file[x]);
-    }
-    data.append("lang", type); // type is the field in backend
     const config = {
       headers: { "content-type": "multipart/form-data" }, //enables web frameworks to automatically parse the data.
     };
-    console.log(this.state.selectedFile);
-    console.log(data);
-    axios
-      .post("http://127.0.0.1:8000/api/v1/ocr_uploader/", data, config)
-      .then((res) => {
-        console.log(res.data);
-      })
+    console.log(this.state.fileType);
+    for (var x = 0; x < this.state.selectedFile.length; x++) {
+      if (this.state.fileType == "application/pdf") {
+        console.log("pddddf");
+       data.append("pdf_input", file[x]);
+    //   data.append("lang", type);
+         data.append('user',userid);
+        console.log(this.state.selectedFile);
+        axios
+          .post("http://127.0.0.1:8000/api/v1/ocr_uploader/documents/", data, config)
+          .then((res) => {
+            console.log(res.data);
+          })
 
-      .catch((err) => console.error(err));
+          .catch((err) => console.error(err));
+      } else {
+        console.log("immmmmmage");
+      data.append("image", file[x]);
+      data.append("lang", type);
+      data.append('user',userid);
+      console.log(this.state.selectedFile);
+      axios
+        .post('http://127.0.0.1:8000/api/v1/ocr_uploader/images/', data, config)
+        .then((res) => {
+          console.log(res.data);
+        })
 
-    // send the data to backend
+        .catch((err) => console.error(err));
+    }}
   };
   form = (props) => {
     return (
@@ -121,7 +142,6 @@ class Extract extends Component {
   };
   Schema = () => {
     const Schema = yup.object().shape({
-      // selectedFile: yup.array().required("Where is the file ?!"),
       datatype: yup.string().required("You need to add Type of your file"),
     });
     return Schema;

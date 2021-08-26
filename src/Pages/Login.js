@@ -3,9 +3,6 @@ import { Field, Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import TextBorder from "../Components/TextBorder.js";
-import { loggedIn } from "../store/contextLog.js";
-import { isLogged } from "../store/contextLog.js";
-
 import { Link } from "react-router-dom";
 class Login extends Component {
   state = {
@@ -21,38 +18,51 @@ class Login extends Component {
       </span>
     ),
     p3: [],
+    userId: "",
   };
 
   OnSubmit = (values) => {
     console.log(values);
-    //loggedIn(); //after then
-    console.log(isLogged());
     const config = {
       headers: { "content-type": "application/json" }, //enables web frameworks to automatically parse the data.
     };
     const username = values.username;
     const password1 = values.password1;
     const email = values.email;
+
     try {
       axios
         .post(
-          "http://127.0.0.1:8000/rest-auth/login/",
+          "http://127.0.0.1:8000/api/v1/user/authenticate/",
           {
             username: username,
-            password1: password1,
+            password: password1,
             email: email,
           },
           config
         )
         .then((res) => {
-          console.log(res.data);
-
+          console.log(res.data.id);
           if (res.status === 200 || res.status === 201) {
-            loggedIn();
+            this.setState({
+              userId: res.data.id,
+            });
+            localStorage.setItem("logeed", 'true');
             console.log("loggin!!");
+            console.log(this.state.userId);
+            localStorage.setItem("userid", this.state.userId);
 
-            this.props.history.push("/profile");
+            this.props.history.push(`/user/${this.state.userId}/`);
+          } else {
+            alert(
+              "SomeThing was wrong..check if your username,email and password is correct..!!"
+            );
           }
+        })
+        .catch((error) => {
+          alert(
+            "Somthing was Wrong.. Check if your username,email or password are correct...! "
+          );
         });
     } catch (error) {
       console.error(error.response.data);

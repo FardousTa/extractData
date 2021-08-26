@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from "react";
+import React, { Component, useState, useContext, useEffect } from "react";
 
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "../Pages/Home.js";
@@ -10,19 +10,24 @@ import Footer from "./Footer.js";
 import Login from "../Pages/Login.js";
 import Show from "../Pages/Show.js";
 import Extract from "../Pages/Extract.js";
-import ProfileMode from "../Components/ProfileMode.js";
-import { isLogged, loggedout } from "../store/contextLog.js";
 
 import SignUp from "../Pages/SignUp.js";
 import logo from "../img/logo/logo.png";
+import Profile from "./Profile.js";
 export default function NaV() {
   let c = "tm-bg-black-transparent tm-sidebar ";
   let cc = "tm-bg-black-transparent tm-sidebar show";
   let showIcon = "showIcon styleIcon ";
   let hideIcon = "hideIcon styleIcon";
+  const userid=localStorage.getItem('userid');
+  const url=`/user/${userid}/`;
   const [open, setopen] = useState(true); // for responsive navbar
+
+ 
   function logout() {
-    loggedout();
+localStorage.removeItem('userid');
+localStorage.setItem('logeed','false');
+
   }
 
   return (
@@ -55,7 +60,7 @@ export default function NaV() {
             onClick={() => setopen(!open)}
           >
             <li className="nav-item">
-              <Link to="/extractData" className="nav-link active" href="#intro">
+              <Link to="/" className="nav-link active" href="#intro">
                 <span className="d-inline-block mr-3">Home</span>
                 <span className="d-inline-block tm-white-rect"></span>
               </Link>
@@ -69,7 +74,7 @@ export default function NaV() {
 
             <li className="nav-item">
               <Link to="/login" className="nav-link active" href="#intro">
-                {isLogged() ? (
+                { localStorage.getItem('logeed')=='true' ? (
                   <span className="d-inline-block mr-3" onClick={logout}>
                     LogOut{" "}
                   </span>
@@ -80,8 +85,8 @@ export default function NaV() {
               </Link>
             </li>
 
-            <li className="nav-item"> {isLogged() ?
-            <Link to="/profile" className="nav-link active">
+            <li className="nav-item"> {localStorage.getItem('logeed')=='true' ?
+            <Link to={url} className="nav-link active">
             <span className="d-inline-block mr-3"> Your Profile</span>
             <span className="d-inline-block tm-white-rect"></span>
           </Link>:
@@ -96,9 +101,9 @@ export default function NaV() {
         </nav>
       </div>
       <Switch>
-        <Route path="/extractData" exact component={Home}></Route>
+        <Route path="/" exact component={Home}></Route>
         <Route path="/contact" exact component={Contact}></Route>
-        {isLogged() ? (
+        { localStorage.getItem('logeed')=='true' ? (
           <Route path="/extract" exact component={Extract}></Route>
         ) : (
           <Route path="/extract" exact component={Login}></Route>
@@ -106,8 +111,7 @@ export default function NaV() {
         <Route path="/login" exact component={Login}></Route>
         <Route path="/show" exact component={Show}></Route>
         <Route path="/SignUp" exact component={SignUp}></Route>
-        <Route path="/profile" exact component={ProfileMode}></Route>
-
+<Route path='/user/:id' exact component={Profile} ></Route>
         <Route component={NotFound}></Route>
       </Switch>
     </BrowserRouter>
