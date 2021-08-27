@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import BasicForm from "./BasicForm.js";
 import RightProfile from "./RightProfile.js";
 import { getuser, getprofile, updatUser } from "./ApiUser.js";
-import FilesForm from "./FilesForm.js";
+import ImgForm from "./ImgForm.js";
+import DocForm from "./DocForm.js";
+import VoicForm from './VoicForm.js';
 class Profile extends Component {
   state = {
     tabClicked: {
       info: true,
-
-      files: false,
+      img: false,
+      doc:false,
+      voc:false
     },
     userId: "",
     profileId: "",
@@ -20,8 +23,8 @@ class Profile extends Component {
     const id = this.state.user.id;
     updatUser(id, values).then((response) => {
       console.log(response.data);
-      //alert("Edit Done!!");
       if (response.status === 200 || response.status === 201) {
+        alert("Edit Done!!");
         this.props.history.push(`/user/${this.state.userId}/`);
 
       }
@@ -134,8 +137,8 @@ class Profile extends Component {
                                     this.setState({
                                       tabClicked: {
                                         info: true,
-
-                                        files: false,
+                                        img: false,
+                                        doc:false
                                       },
                                     })
                                   }
@@ -159,12 +162,60 @@ class Profile extends Component {
                                       tabClicked: {
                                         info: false,
 
-                                        files: true,
+                                        img: true,
+                                        doc:false
                                       },
                                     })
                                   }
                                 >
-                                  Your Files
+                                  Your Photos
+                                </button>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                <button
+                                  class="nav-link "
+                                  id="doc"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#doc"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="contact"
+                                  aria-selected="false"
+                                  onClick={() =>
+                                    this.setState({
+                                      tabClicked: {
+                                        info: false,
+                                        img: false,
+                                        doc:true
+                                      },
+                                    })
+                                  }
+                                >
+                                  Documents
+                                </button>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                <button
+                                  class="nav-link "
+                                  id="voc"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#voc"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="contact"
+                                  aria-selected="false"
+                                  onClick={() =>
+                                    this.setState({
+                                      tabClicked: {
+                                        info: false,
+                                        img: false,
+                                        doc:false,
+                                        voc:true
+                                      },
+                                    })
+                                  }
+                                >
+                                  Voices
                                 </button>
                               </li>
                             </ul>
@@ -187,14 +238,34 @@ class Profile extends Component {
 
                           <div
                             className={
-                              this.state.tabClicked.files ? tabActive : tab
+                              this.state.tabClicked.img ? tabActive : tab
                             }
                             id="nav-contact"
                             role="tabpanel"
                             aria-labelledby="nav-contact-tab"
                           >
-                            <FilesForm />
-                            the section for your file here
+                            <ImgForm />
+                           
+                          </div>
+                          <div
+                            className={
+                              this.state.tabClicked.doc ? tabActive : tab
+                            }
+                            id="nav-doc"
+                            role="tabpanel"
+                            aria-labelledby="nav-home-tab"
+                          >
+                           <DocForm /> 
+                          </div>
+                          <div
+                            className={
+                              this.state.tabClicked.voc ? tabActive : tab
+                            }
+                            id="nav-voc"
+                            role="tabpanel"
+                            aria-labelledby="nav-home-tab"
+                          >
+                           <VoicForm />
                           </div>
                         </div>
                       </div>

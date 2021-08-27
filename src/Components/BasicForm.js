@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Field, Formik, ErrorMessage } from "formik";
-import * as yup from "yup";
+import { Field, Formik } from "formik";
 class BasicForm extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +10,7 @@ class BasicForm extends Component {
         <div class="row">
           <div class="col">
             <div class="mb-2">
-              <b>Basic Information :</b>
+              <h5>Basic Information :</h5>
             </div>
 
             <div class="row">
