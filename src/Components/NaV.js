@@ -10,7 +10,7 @@ import Footer from "./Footer.js";
 import Login from "../Pages/Login.js";
 import Show from "../Pages/Show.js";
 import Extract from "../Pages/Extract.js";
-
+import ShowImage from '../Pages/ShowImage.js';
 import SignUp from "../Pages/SignUp.js";
 import logo from "../img/logo/logo.png";
 import Profile from "./Profile.js";
@@ -109,7 +109,9 @@ localStorage.setItem('logeed','false');
           <Route path="/extract" exact component={Login}></Route>
         )}
         <Route path="/login" exact component={Login}></Route>
-        <Route path="/show" exact component={Show}></Route>
+        <Route path="/show/:id" exact component={Show}></Route>
+        <Route path="/showImage/:id" exact component={ShowImage}></Route>
+
         <Route path="/SignUp" exact component={SignUp}></Route>
 <Route path='/user/:id' exact component={Profile} ></Route>
         <Route component={NotFound}></Route>

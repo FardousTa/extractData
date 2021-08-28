@@ -1,7 +1,35 @@
 import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
-export default function Show(props) {
-  return (
+import { getDocs } from "../Components/ApiUser.js";
+
+class Show extends Component  {
+  
+
+    state = {
+      docId:"",
+      docs: {},
+    };
+    close=()=>{
+      const userid=localStorage.getItem('userid');      
+      this.props.history.push(`/user/${userid}/`);
+    }
+    componentDidMount = () => {
+      const docId = this.props.match.params.id;
+      getDocs(docId)
+        .then((response) => {
+          console.log(response.data);
+          this.setState({
+            docs: response.data,
+          });
+       
+        })
+        .catch((error) => {
+          alert("Somthing was Wrong.. so cannot  show your profile");
+        });
+    };
+    
+    render() {
+    return (
     <main role="main" className="ml-sm-auto col-12">
       <div class="tm-section-wrap bg-white">
         <section id="work" class="row tm-section">
@@ -11,11 +39,11 @@ export default function Show(props) {
                 <div class="tm-gallery-wrap">
                   <h2 class="tm-color-primary tm-section-title mb-4 ml-2">
                     <Modal.Header closeButton>
-                      <Modal.Title>title</Modal.Title>
+                      <Modal.Title>YOUR DATA HERE: </Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body >
-                      <p>test</p>
+                      <p>{this.state.docs.text}</p>
                     </Modal.Body>
                     <Modal.Footer>
                       <div class="col d-flex .justify-content-sm-start">
@@ -39,6 +67,7 @@ export default function Show(props) {
                             color: "#fff",
                             backgroundColor: "red",
                           }}
+                          onClick={this.close}
                         >
                           close
                         </button>
@@ -53,5 +82,7 @@ export default function Show(props) {
         </section>
       </div>
     </main>
-  );
+    );
+  }
 }
+export default Show;

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { GetFileName } from "./ApiUser.js";
+import { Link } from "react-router-dom";
+
 class DocForm extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +70,7 @@ class DocForm extends Component {
                     <p>{GetFileName(i.pdf_input)} </p>
                   </div>
                   <div class="col">
+                  <Link to={`/show/${i.id}`}>
                     <button
                       class="btn btn-outline-primary"
                       style={{
@@ -75,9 +78,8 @@ class DocForm extends Component {
                         textAlign: "right",
                         backgroundColor: "rgba(1, 7, 56, 0.815)",
                       }}
-                    >
-                      view
-                    </button>
+                    >  view
+                    </button> </Link>
                     {"   "}{" "}
                     <button
                       className="btn btn-danger"

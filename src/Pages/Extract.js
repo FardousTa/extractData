@@ -22,6 +22,7 @@ class Extract extends Component {
     filesName: [],
     selectedFile: null,
     fileType: "",
+    upId:""
 
 
   };
@@ -70,6 +71,11 @@ class Extract extends Component {
           .post("http://127.0.0.1:8000/api/v1/ocr_uploader/documents/", data, config)
           .then((res) => {
             console.log(res.data);
+            this.setState({
+              upId:res.data.id
+            });
+            console.log(this.state.upId);
+            this.props.history.push(`/show/${this.state.upId}/`);
           })
 
           .catch((err) => console.error(err));
@@ -83,6 +89,7 @@ class Extract extends Component {
         .post('http://127.0.0.1:8000/api/v1/ocr_uploader/images/', data, config)
         .then((res) => {
           console.log(res.data);
+          this.props.history.push(`/showInage/${this.state.upId}/`);
         })
 
         .catch((err) => console.error(err));

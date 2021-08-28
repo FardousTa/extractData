@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { GetFileName } from "./ApiUser.js";
+import { Link } from "react-router-dom";
+
 class ImgForm extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +69,7 @@ class ImgForm extends Component {
                   <div class="col form-group" style={{ textAlign: "left" }}>
                     <p>{GetFileName(i.image)} </p>
                   </div>
-                  <div class="col">
+                  <div class="col"> <Link to={`/showImage/${i.id}/`}>
                     <button
                       class="btn btn-outline-primary"
                       style={{
@@ -77,7 +79,7 @@ class ImgForm extends Component {
                       }}
                     >
                       view
-                    </button>
+                    </button></Link>
                     {"   "}{" "}
                     <button
                       className="btn btn-danger"

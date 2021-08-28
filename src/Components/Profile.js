@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import BasicForm from "./BasicForm.js";
 import RightProfile from "./RightProfile.js";
-import { getuser, getprofile, updatUser } from "./ApiUser.js";
+import { getuser, getprofile, updatUser ,updatprofile} from "./ApiUser.js";
 import ImgForm from "./ImgForm.js";
 import DocForm from "./DocForm.js";
-import VoicForm from './VoicForm.js';
+import VoicForm from "./VoicForm.js";
 class Profile extends Component {
   state = {
     tabClicked: {
       info: true,
       img: false,
-      doc:false,
-      voc:false
+      doc: false,
+      voc: false,
     },
     userId: "",
     profileId: "",
     profile: {},
     user: {},
+    image: {},
   };
-
+ 
   updateUserData = (values) => {
     const id = this.state.user.id;
     updatUser(id, values).then((response) => {
@@ -26,9 +27,29 @@ class Profile extends Component {
       if (response.status === 200 || response.status === 201) {
         alert("Edit Done!!");
         this.props.history.push(`/user/${this.state.userId}/`);
-
       }
     });
+  };
+   
+  updateProfileData = (values) => {
+    const id = this.state.profile.id;
+    updatprofile(id, values).then((response) => {
+      console.log(response.data);
+      if (response.status === 200 || response.status === 201) {
+        alert("Edit Done!!");
+        this.props.history.push(`/user/${this.state.userId}/`);
+      } 
+      console.log(this.state.image)
+    });
+  };
+  handleselectedFile = (event) => {
+    
+    this.setState({
+      ...this.state,
+      image: URL.createObjectURL(event.target.files[0]),
+      
+    });
+    this.updateProfileData( URL.createObjectURL(event.target.files[0]));
   };
 
   componentDidMount = () => {
@@ -39,7 +60,9 @@ class Profile extends Component {
         this.setState({
           profile: response.data,
           userId: response.data.user,
+          image: response.data.image,
         });
+        console.log(this.state.image);
         getuser(this.state.userId).then((response) => {
           console.log(response.data);
           this.setState({
@@ -81,7 +104,7 @@ class Profile extends Component {
                                   }}
                                 >
                                   <img
-                                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                    src={this.state.image}
                                     style={{ height: "139px" }}
                                     alt="add photo"
                                   />
@@ -106,8 +129,18 @@ class Profile extends Component {
                                   type="button"
                                 >
                                   <i class="fa fa-fw fa-camera"></i>
-                                  <span>Change Photo</span>
-                                </button>
+
+                                  <label htmlFor="actual-btn">
+                                    Change Photo
+                                  </label>
+                                </button>{" "}
+                                <input
+                                  type="file"
+                                  id="actual-btn"
+                                  onChange={(e) => this.handleselectedFile(e)}
+                                  hidden
+                                  multiple
+                                />
                               </div>
                             </div>
                             <div class="text-center text-sm-right">
@@ -138,7 +171,7 @@ class Profile extends Component {
                                       tabClicked: {
                                         info: true,
                                         img: false,
-                                        doc:false
+                                        doc: false,
                                       },
                                     })
                                   }
@@ -163,7 +196,7 @@ class Profile extends Component {
                                         info: false,
 
                                         img: true,
-                                        doc:false
+                                        doc: false,
                                       },
                                     })
                                   }
@@ -186,7 +219,7 @@ class Profile extends Component {
                                       tabClicked: {
                                         info: false,
                                         img: false,
-                                        doc:true
+                                        doc: true,
                                       },
                                     })
                                   }
@@ -209,8 +242,8 @@ class Profile extends Component {
                                       tabClicked: {
                                         info: false,
                                         img: false,
-                                        doc:false,
-                                        voc:true
+                                        doc: false,
+                                        voc: true,
                                       },
                                     })
                                   }
@@ -245,7 +278,6 @@ class Profile extends Component {
                             aria-labelledby="nav-contact-tab"
                           >
                             <ImgForm />
-                           
                           </div>
                           <div
                             className={
@@ -255,7 +287,7 @@ class Profile extends Component {
                             role="tabpanel"
                             aria-labelledby="nav-home-tab"
                           >
-                           <DocForm /> 
+                            <DocForm />
                           </div>
                           <div
                             className={
@@ -265,7 +297,7 @@ class Profile extends Component {
                             role="tabpanel"
                             aria-labelledby="nav-home-tab"
                           >
-                           <VoicForm />
+                            <VoicForm />
                           </div>
                         </div>
                       </div>
