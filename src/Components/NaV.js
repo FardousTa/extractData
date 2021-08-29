@@ -61,7 +61,7 @@ localStorage.setItem('logeed','false');
             onClick={() => setopen(!open)}
           >
             <li className="nav-item">
-              <Link to="/" className="nav-link active" href="#intro">
+              <Link to="/extractData" className="nav-link active" href="#intro">
                 <span className="d-inline-block mr-3">Home</span>
                 <span className="d-inline-block tm-white-rect"></span>
               </Link>
@@ -102,7 +102,7 @@ localStorage.setItem('logeed','false');
         </nav>
       </div>
       <Switch>
-        <Route path="/" exact component={Home}></Route>
+        <Route path="/extractData" exact component={Home}></Route>
         <Route path="/contact" exact component={Contact}></Route>
         { localStorage.getItem('logeed')=='true' ? (
           <Route path="/extract" exact component={Extract}></Route>
