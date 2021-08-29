@@ -13,7 +13,7 @@ class VoicForm extends Component {
     
   };
 
-  getimages = (id) => {
+  getvoices= (id) => {
     try {
       const response = axios.get(
         `http://127.0.0.1:8000/api/v1/user/user/${id}/voices/`
@@ -23,15 +23,15 @@ class VoicForm extends Component {
       console.error(error);
     }
   };
-  deleteimg = (id) => {
+  deletevoc = (id) => {
     const response =  axios.delete(
-      `http://127.0.0.1:8000/api/v1/ocr_uploader/images/${id}/`
+      `http://127.0.0.1:8000/api/v1/ocr_uploader/voices/${id}/`
     );
     return response; //very important to show 'data'
   };
-  delImage = (i) => {
+  delvoc= (i) => {
     //delete form server
-    this.deleteimg(i.id)
+    this.deletevoc(i.id)
       .then(() => {
         // delete from state
         let voic = this.state.voic;
@@ -46,10 +46,10 @@ class VoicForm extends Component {
       });
   };
   componentDidMount = () => {
-    this.getimages(this.state.userid).then((res) => {
+    this.getvoices(this.state.userid).then((res) => {
       console.log(res.data);
       this.setState({
-        voic: res.data.Voice, // here you need to edit ocrtext
+        voic: res.data, // here you need to edit ocrtext
       });
     });
   };
@@ -64,7 +64,34 @@ class VoicForm extends Component {
 
           <ul className="list-group list-group-flush">
         
-            test
+          {this.state.voic.map((i) => (
+              <li key={i.id} className="list-group-item">
+                <div class="row">
+                  <div class="col form-group" style={{ textAlign: "left" }}>
+                    <p>{GetFileName(i.voice)} </p>
+                  </div>
+                  <div class="col"> <Link to={`/ShowAud/${i.id}/`}>
+                    <button
+                      class="btn btn-outline-primary"
+                      style={{
+                        color: "#fff",
+                        textAlign: "right",
+                        backgroundColor: "rgba(1, 7, 56, 0.815)",
+                      }}
+                    >
+                      view
+                    </button></Link>
+                    {"   "}{" "}
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => this.delvoc(i)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

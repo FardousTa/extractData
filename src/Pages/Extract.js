@@ -22,9 +22,7 @@ class Extract extends Component {
     filesName: [],
     selectedFile: null,
     fileType: "",
-    upId:""
-
-
+    upId: "",
   };
 
   handleselectedFile = (event) => {
@@ -53,7 +51,7 @@ class Extract extends Component {
   OnSubmit = (values) => {
     let type = values.datatype;
     let file = this.state.selectedFile;
-  let  userid=localStorage.getItem('userid');
+    let userid = localStorage.getItem("userid");
     values.file = file;
     const data = new FormData();
     const config = {
@@ -63,37 +61,68 @@ class Extract extends Component {
     for (var x = 0; x < this.state.selectedFile.length; x++) {
       if (this.state.fileType == "application/pdf") {
         console.log("pddddf");
-       data.append("pdf_input", file[x]);
-    //   data.append("lang", type);
-         data.append('user',userid);
+        data.append("pdf_input", file[x]);
+        //   data.append("lang", type);
+        data.append("user", userid);
         console.log(this.state.selectedFile);
         axios
-          .post("http://127.0.0.1:8000/api/v1/ocr_uploader/documents/", data, config)
+          .post(
+            "http://127.0.0.1:8000/api/v1/ocr_uploader/documents/",
+            data,
+            config
+          )
           .then((res) => {
             console.log(res.data);
             this.setState({
-              upId:res.data.id
+              upId: res.data.id,
             });
             console.log(this.state.upId);
             this.props.history.push(`/show/${this.state.upId}/`);
           })
 
           .catch((err) => console.error(err));
+      } else if (this.state.fileType == "audio/wav") {
+        console.log("audio");
+        data.append("voice", file[x]);
+        //   data.append("lang", type);
+        data.append("user", userid);
+        console.log(this.state.selectedFile);
+        axios
+          .post(
+            "http://127.0.0.1:8000/api/v1/ocr_uploader/voices/",
+            data,
+            config
+          )
+          .then((res) => {
+            console.log(res.data);
+            this.setState({
+              upId: res.data.id,
+            });
+            console.log(this.state.upId);
+            this.props.history.push(`/ShowAud/${this.state.upId}/`);
+          })
+
+          .catch((err) => console.error(err));
       } else {
         console.log("immmmmmage");
-      data.append("image", file[x]);
-      data.append("lang", type);
-      data.append('user',userid);
-      console.log(this.state.selectedFile);
-      axios
-        .post('http://127.0.0.1:8000/api/v1/ocr_uploader/images/', data, config)
-        .then((res) => {
-          console.log(res.data);
-          this.props.history.push(`/showInage/${this.state.upId}/`);
-        })
+        data.append("image", file[x]);
+        data.append("lang", type);
+        data.append("user", userid);
+        console.log(this.state.selectedFile);
+        axios
+          .post(
+            "http://127.0.0.1:8000/api/v1/ocr_uploader/images/",
+            data,
+            config
+          )
+          .then((res) => {
+            console.log(res.data);
+            this.props.history.push(`/showInage/${this.state.upId}/`);
+          })
 
-        .catch((err) => console.error(err));
-    }}
+          .catch((err) => console.error(err));
+      }
+    }
   };
   form = (props) => {
     return (

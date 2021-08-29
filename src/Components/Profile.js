@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BasicForm from "./BasicForm.js";
 import RightProfile from "./RightProfile.js";
-import { getuser, getprofile, updatUser ,updatprofile} from "./ApiUser.js";
+import { getuser, getprofile, updatUser, updatprofile } from "./ApiUser.js";
 import ImgForm from "./ImgForm.js";
 import DocForm from "./DocForm.js";
 import VoicForm from "./VoicForm.js";
@@ -13,45 +13,19 @@ class Profile extends Component {
       doc: false,
       voc: false,
     },
-    userId: "",
-    profileId: "",
     profile: {},
     user: {},
     image: {},
   };
- 
   updateUserData = (values) => {
     const id = this.state.user.id;
     updatUser(id, values).then((response) => {
       console.log(response.data);
       if (response.status === 200 || response.status === 201) {
-        alert("Edit Done!!");
-        this.props.history.push(`/user/${this.state.userId}/`);
+        alert("Edit Done!! Update the page to see the changes ");
       }
     });
   };
-   
-  updateProfileData = (values) => {
-    const id = this.state.profile.id;
-    updatprofile(id, values).then((response) => {
-      console.log(response.data);
-      if (response.status === 200 || response.status === 201) {
-        alert("Edit Done!!");
-        this.props.history.push(`/user/${this.state.userId}/`);
-      } 
-      console.log(this.state.image)
-    });
-  };
-  handleselectedFile = (event) => {
-    
-    this.setState({
-      ...this.state,
-      image: URL.createObjectURL(event.target.files[0]),
-      
-    });
-    this.updateProfileData( URL.createObjectURL(event.target.files[0]));
-  };
-
   componentDidMount = () => {
     const profileId = this.props.match.params.id;
     getprofile(profileId)
@@ -59,11 +33,11 @@ class Profile extends Component {
         console.log(response.data);
         this.setState({
           profile: response.data,
-          userId: response.data.user,
           image: response.data.image,
         });
-        console.log(this.state.image);
-        getuser(this.state.userId).then((response) => {
+
+        const userid = localStorage.getItem("userid");
+        getuser(userid).then((response) => {
           console.log(response.data);
           this.setState({
             user: response.data,
@@ -104,7 +78,7 @@ class Profile extends Component {
                                   }}
                                 >
                                   <img
-                                    src={this.state.image}
+                                    src=""
                                     style={{ height: "139px" }}
                                     alt="add photo"
                                   />
@@ -137,7 +111,7 @@ class Profile extends Component {
                                 <input
                                   type="file"
                                   id="actual-btn"
-                                  onChange={(e) => this.handleselectedFile(e)}
+                                  /* onChange={(e) => this.handleselectedFile(e)}*/
                                   hidden
                                   multiple
                                 />
@@ -287,8 +261,7 @@ class Profile extends Component {
                             role="tabpanel"
                             aria-labelledby="nav-home-tab"
                           >
-                            <DocForm />
-                          </div>
+ <DocForm />                          </div>
                           <div
                             className={
                               this.state.tabClicked.voc ? tabActive : tab

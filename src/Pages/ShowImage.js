@@ -13,14 +13,12 @@ class ShowImage extends Component {
   };
   TextFile = () => {
     const element = document.createElement("a");
-    const file = new Blob([document.getElementById("myInput")], {
-      type: "text/plain",
-    });
+    const file = new Blob([this.state.docs.text], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
     element.download = "myFile.txt";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
-  };
+  }
   componentDidMount = () => {
     const docId = this.props.match.params.id;
     getImage(docId)
@@ -50,7 +48,7 @@ class ShowImage extends Component {
                       </Modal.Header>
 
                       <Modal.Body>
-                        <p id="myInput">test test</p>
+                        <p >{this.state.docs.text}</p>
                       </Modal.Body>
                       <Modal.Footer>
                         <div class="col d-flex .justify-content-sm-start">

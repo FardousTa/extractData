@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
-import { getDocs } from "../Components/ApiUser.js";
+import { getvoc } from "../Components/ApiUser.js";
 
-class Show extends Component  {
+class ShowAud extends Component  {
   
 
     state = {
@@ -14,16 +14,16 @@ class Show extends Component  {
       this.props.history.push(`/user/${userid}/`);
     }
     TextFile = () => {
-      const element = document.createElement("a");
-      const file = new Blob([this.state.docs.text], {type: 'text/plain'});
-      element.href = URL.createObjectURL(file);
-      element.download = "myFile.txt";
-      document.body.appendChild(element); // Required for this to work in FireFox
-      element.click();
-    }
-    componentDidMount = () => {
+        const element = document.createElement("a");
+        const file = new Blob([this.state.docs.text], {type: 'text/plain'});
+        element.href = URL.createObjectURL(file);
+        element.download = "myFile.txt";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
+      }
+    componentDidMount = () => { 
       const docId = this.props.match.params.id;
-      getDocs(docId)
+      getvoc(docId)
         .then((response) => {
           console.log(response.data);
           this.setState({
@@ -57,11 +57,11 @@ class Show extends Component  {
                       <div class="col d-flex .justify-content-sm-start">
                         <button
                           class="btn rounded-1  d-block ml-auto tm-btn-primary"
-                          type="button"
+                          type="button"  onClick={this.TextFile}
                           style={{
                             color: "#fff",
                             backgroundColor: "rgba(1, 7, 56, 0.815)",
-                          }}  onClick={this.TextFile}
+                          }}
                         >
                           Download Data
                         </button>
@@ -93,4 +93,4 @@ class Show extends Component  {
     );
   }
 }
-export default Show;
+export default ShowAud;

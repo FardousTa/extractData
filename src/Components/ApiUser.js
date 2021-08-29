@@ -16,7 +16,19 @@ import axios from 'axios';
     try {
       const response = axios.get(
 
-          `http://127.0.0.1:8000/api/v1/ocr_uploader/Documents/${id}/`
+          `http://127.0.0.1:8000/api/v1/ocr_uploader/documents/${id}/`
+      );
+      return response; //very important to show 'data'
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+  export function getvoc (id){
+    try {
+      const response = axios.get(
+
+          `http://127.0.0.1:8000/api/v1/ocr_uploader/voices/${id}/`
       );
       return response; //very important to show 'data'
     } catch (error) {
