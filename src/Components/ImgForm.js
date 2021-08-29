@@ -49,7 +49,7 @@ class ImgForm extends Component {
     this.getimages(this.state.userid).then((res) => {
       console.log(res.data);
       this.setState({
-        images: res.data.OCRText,
+        images: res.data,
       });
     });
   };

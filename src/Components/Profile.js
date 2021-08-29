@@ -15,8 +15,7 @@ class Profile extends Component {
     },
     profile: {},
     user: {},
-    image: {},
-  };
+ };
   updateUserData = (values) => {
     const id = this.state.user.id;
     updatUser(id, values).then((response) => {
@@ -28,15 +27,13 @@ class Profile extends Component {
   };
   componentDidMount = () => {
     const profileId = this.props.match.params.id;
+    const userid = localStorage.getItem("userid");
     getprofile(profileId)
       .then((response) => {
         console.log(response.data);
         this.setState({
           profile: response.data,
-          image: response.data.image,
         });
-
-        const userid = localStorage.getItem("userid");
         getuser(userid).then((response) => {
           console.log(response.data);
           this.setState({
@@ -111,7 +108,6 @@ class Profile extends Component {
                                 <input
                                   type="file"
                                   id="actual-btn"
-                                  /* onChange={(e) => this.handleselectedFile(e)}*/
                                   hidden
                                   multiple
                                 />
@@ -261,7 +257,8 @@ class Profile extends Component {
                             role="tabpanel"
                             aria-labelledby="nav-home-tab"
                           >
- <DocForm />                          </div>
+                            <DocForm />
+                          </div>
                           <div
                             className={
                               this.state.tabClicked.voc ? tabActive : tab

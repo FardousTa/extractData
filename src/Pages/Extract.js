@@ -117,7 +117,10 @@ class Extract extends Component {
           )
           .then((res) => {
             console.log(res.data);
-            this.props.history.push(`/showInage/${this.state.upId}/`);
+            this.setState({
+              upId: res.data.id,
+            });
+            this.props.history.push(`/showImage/${this.state.upId}/`);
           })
 
           .catch((err) => console.error(err));

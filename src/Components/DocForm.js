@@ -49,7 +49,7 @@ class DocForm extends Component {
     this.getdoc(this.state.userid).then((res) => {
       console.log(res.data);
       this.setState({
-        getdoc: res.data.Document,
+        getdoc: res.data,
       });
     });
   };
